@@ -1,7 +1,6 @@
 <h1>
   Article
 </h1>
-
 <table>
   <th>Id</th>
   <th>Ttile</th>
@@ -12,3 +11,6 @@
     <td><%= @article.description %></td>
   </tr>
 </table>
+
+<%= link_to :Edit , edit_article_path(@article) %>
+<%= link_to :Lists , articles_path %>
