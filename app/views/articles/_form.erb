@@ -1,22 +1,30 @@
 <% if @article.errors.any? %>
   <ul>
+    <div class="alert alert-danger" role="alert">
     <% @article.errors.full_messages.each do |msg| %>
       <li>
-        <%= msg %>
+          <%= msg %>
       </li>
     <% end %>
+    </div>
   </ul>
 <% end %>
-<%= form_for @article do |f| %>
-  <p>
-    <%= f.label :title %>
-    <%= f.text_field :title  %>
-  </p>
-  <p>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </p>
-  <p>
-    <%= f.submit :Edit %>
-  </p>
-<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for @article do |f| %>
+      <p>
+        <%= f.label :title, class: "form-label" %>
+        <%= f.text_field :title, class: "form-control"  %>
+        <div class="form-text">Choose Smart title :)</div>
+      </p>
+      <p>
+        <%= f.label :description, class: "form-label" %>
+        <%= f.text_area :description ,class: "form-control" %>
+      </p>
+      <p>
+        <%= f.submit :Create, class: "btn btn-primary" %>
+      </p>
+    <% end %>
+  </div>
+</div>
+
