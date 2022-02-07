@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+table{
+    border: 7px solid black;
+    border-radius: 10px;
+}
+td{
+    border: 7px solid black;
+    border-radius: 10px;
+}
+tr:hover {background-color: #D7BDE2;}

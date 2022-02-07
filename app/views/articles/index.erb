@@ -4,7 +4,7 @@
   <th>Title</th>
   <th>Description</th>
   <% @article.each do |article| %>
-    <tr>
+    <tr >
       <td><%= article.id %></td>
       <td><%= article.title %></td>
       <td><%= article.description %></td>
@@ -14,4 +14,3 @@
     </tr>
   <% end %>
 </table>
-<%= link_to :Create, new_article_path, class:"btn btn-infobtn btn-info" %>
