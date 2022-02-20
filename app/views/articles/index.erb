@@ -1,11 +1,13 @@
 <h1> List of all Articles </h1>
 <table>
   <th>ID</th>
+  <td>User</td>
   <th>Title</th>
   <th>Description</th>
   <% @article.each do |article| %>
     <tr >
       <td><%= article.id %></td>
+      <td><%= article.user %></td>
       <td><%= article.title %></td>
       <td><%= article.description %></td>
       <td> <%= link_to :Edit, edit_article_path(article) %> </td>

@@ -3,10 +3,12 @@
 </h1>
 <table>
   <th>Id</th>
+  <td>User</td>
   <th>Ttile</th>
   <th>Description</th>
   <tr>
     <td><%= @article.id %></td>
+    <td><%= @article.user.username %></td>
     <td><%= @article.title %></td>
     <td><%= @article.description %></td>
   </tr>
