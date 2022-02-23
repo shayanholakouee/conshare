@@ -1,0 +1,18 @@
+<h1>Login</h1>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for :session, url: login_path do |f| %>
+      <p>
+        <%= f.label :Email, class: "form-label" %>
+        <%= f.email_field :email ,class: "form-control" %>
+      </p>
+      <p>
+        <%= f.label :Password, class: "form-label" %>
+        <%= f.password_field :password ,class: "form-control" %>
+      </p>
+      <p>
+        <%= f.submit :Login, class:"btn btn-primary" %>
+      </p>
+    <% end %>
+  </div>
+</div>
