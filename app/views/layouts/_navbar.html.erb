@@ -9,16 +9,23 @@
         <li class="nav-item">
           <%= link_to :Articles, articles_path, class: "nav-link", style: "color: #EFEFEF " %>
         </li>
+        <% if logged_in? %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" style="color: #EFEFEF" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Actions
+            Profile
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><%= link_to "User Profile", user_path(current_user) , class: "dropdown-item" %></li>
+            <li><%= link_to "Edit Profile", edit_user_path(current_user), class: "dropdown-item" %></li>
             <li><%= link_to "New Article", new_article_path, class: "dropdown-item" %></li>
             <li><hr class="dropdown-divider"></li>
-            <li><%= link_to :Logout, logout_path, method: :delete %></li>
+            <li><%= link_to :Logout, logout_path, method: :delete, class:"dropdown-item" %></li>
           </ul>
-        </li>
+        <% end %>
+        <% unless logged_in? %>
+          <li> <%=  link_to :Login, login_path, class: "nav-link"  %> </li>
+          <li> <%=  link_to :Signup, signup_path, class: "nav-link"  %> </li>
+        <%  end %>
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

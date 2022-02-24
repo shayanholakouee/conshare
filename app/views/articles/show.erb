@@ -8,12 +8,12 @@
   <th>Description</th>
   <tr>
     <td><%= @article.id %></td>
-    <td><%= @article.user.username %></td>
+    <td><%= @article.user.username if @article.user %></td>
     <td><%= @article.title %></td>
     <td><%= @article.description %></td>
   </tr>
 </table>
-
+<% if logged_in? and current_user == @article.user %>
 <%= link_to :Edit , edit_article_path(@article), class:"btn btn-primary" %>
 <%= link_to :Delete, article_path(@article), method: :delete, data: {confirm: "are you sure?"}, class: "btn btn-danger" %>
-
+<% end %>
