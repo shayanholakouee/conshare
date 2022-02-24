@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, except: [:index, :new, :create]
+  before_action :require_user , only: [:edit,:update, :show]
+  before_action :require_same_user , only: [:edit, :update]
   def index
     @user = User.all
   end
@@ -43,6 +45,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email , :password )
+  end
+
+  def require_same_user
+    unless  current_user == @user
+      flash[:danger] = "this is not your profile"
+      redirect_to root_path
+    end
   end
 
 end
