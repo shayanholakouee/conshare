@@ -9,10 +9,11 @@
         <li class="nav-item">
           <%= link_to :Articles, articles_path, class: "nav-link", style: "color: #EFEFEF " %>
         </li>
+        <li><%= link_to "Users", users_path, class:"nav-link", style: "color: #EFEFEF " %></li>
         <% if logged_in? %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" style="color: #EFEFEF" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profile
+            Profile <%= "admin" if current_user.admin? %>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><%= link_to "User Profile", user_path(current_user) , class: "dropdown-item" %></li>

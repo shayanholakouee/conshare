@@ -47,13 +47,17 @@ class ArticlesController < ApplicationController
 
   private
     def set_article
-     @article = Article.find(params[:id])
+     @article = Article.find_by(id: params[:id])
+     unless @article
+       flash[:danger] = "no such article"
+       redirect_to root_path
+     end
     end
     def article_params
       params.require(:article).permit(:title, :description)
     end
     def require_same_user
-      unless current_user == @article.user
+      unless current_user == @article.user or current_user.admin?
         flash[:danger] = "Your are not the owner of this article"
         redirect_to root_path
       end

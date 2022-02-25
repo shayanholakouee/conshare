@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, except: [:index, :new, :create]
   before_action :require_user , only: [:edit,:update, :show]
   before_action :require_same_user , only: [:edit, :update]
+  before_action :admin, only: [:destroy]
   def index
     @user = User.all
   end
@@ -14,7 +15,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:success] = "New account created #{@user.username}"
-      redirect_to root_path
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
     else
       render :new
     end
@@ -37,10 +39,24 @@ class UsersController < ApplicationController
 
   end
 
+  def destroy
+    if @user.destroy
+      flash[:warning] = "user deleted"
+      redirect_to root_path
+    else
+      flash[:danger] = "action interrupted do it again"
+      redirect_to root_path
+    end
+  end
+
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
+    unless @user
+      flash[:danger] = "no user with that info"
+      redirect_to root_path
+    end
   end
 
   def user_params
@@ -50,6 +66,13 @@ class UsersController < ApplicationController
   def require_same_user
     unless  current_user == @user
       flash[:danger] = "this is not your profile"
+      redirect_to root_path
+    end
+  end
+
+  def admin
+    unless current_user.admin?
+      flash[:danger] = "Not authorized action"
       redirect_to root_path
     end
   end
